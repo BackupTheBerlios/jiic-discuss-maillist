@@ -1,0 +1,51 @@
+From Sangita_Pandit at Dell.com  Mon Aug  2 23:24:33 2010
+From: Sangita_Pandit at Dell.com (Sangita_Pandit at Dell.com)
+Date: Mon, 2 Aug 2010 16:24:33 -0500
+Subject: [JIIC-Discuss] Issue creating the iso file for ESXI
+Message-ID: <F53150534F28D94F9A335960602E5B8A067CE2B30F@AUSX7MCPS302.AMER.DELL.COM>
+
+I have an ESXI 4.1 iso extracted in the folder.  I am trying to rebind the iso folder back into iso using the JIIC.  However, the iso I create is giving the checksum error.  I am not sure what the issue is.  Please can you help me in pointing what is wrong?  Any help will be greatly appreciated.
+
+Here is the code snippet
+ISO9660Config iso9660config = new ISO9660Config();
+            iso9660config.allowASCII(false);
+            iso9660config.setInterchangeLevel(1);
+            iso9660config.restrictDirDepthTo8(true);
+            iso9660config.setPublisher("Modified By Me");
+            iso9660config.setVolumeID("Modified ISO");
+            iso9660config.setDataPreparer("MySelf.");
+            //iso9660config.setCopyrightFile(new File("Copyright.txt"));
+            iso9660config.forceDotDelimiter(true);
+
+                  eltoritoconfig = new ElToritoConfig(new File(
+                              "C://TEMP//isofiles1//ISOLINUX.BIN"),
+                              ElToritoConfig.BOOT_MEDIA_TYPE_NO_EMU,
+                              ElToritoConfig.PLATFORM_ID_X86, "BOOT.CAT", 4,
+                              ElToritoConfig.LOAD_SEGMENT_7C0
+                              );
+                  eltoritoconfig.setGenBootInfoTable(true);
+
+            RockRidgeConfig rockridgeconfig = null;
+                  rockridgeconfig = new RockRidgeConfig();
+                  rockridgeconfig.setMkisofsCompatibility(false);
+                  rockridgeconfig.hideMovedDirectoriesStore(true);
+                  rockridgeconfig.forcePortableFilenameCharacterSet(true);
+
+            ISOImageFileHandler isoimagefilehandler = new ISOImageFileHandler(
+                        ISOFile);
+            CreateISO createiso = new CreateISO(isoimagefilehandler,
+                        iso9660rootdirectory);
+            createiso.process(iso9660config, rockridgeconfig, null,
+                        eltoritoconfig);
+
+
+
+Thanks
+Sangita Pandit
+(512) 728 1606(W)
+(512) 879 8328(C)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/jiic-discuss/attachments/20100802/377cc7b0/attachment.html>
+

@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [JIIC-Discuss] Issue creating the iso file for ESXI
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/jiic-discuss/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:jiic-discuss%40lists.berlios.de?Subject=Re%3A%20%5BJIIC-Discuss%5D%20Issue%20creating%20the%20iso%20file%20for%20ESXI&In-Reply-To=%3CF53150534F28D94F9A335960602E5B8A067CE2B30F%40AUSX7MCPS302.AMER.DELL.COM%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[JIIC-Discuss] Issue creating the iso file for ESXI</H1>
+    <B>Sangita_Pandit at Dell.com</B> 
+    <A HREF="mailto:jiic-discuss%40lists.berlios.de?Subject=Re%3A%20%5BJIIC-Discuss%5D%20Issue%20creating%20the%20iso%20file%20for%20ESXI&In-Reply-To=%3CF53150534F28D94F9A335960602E5B8A067CE2B30F%40AUSX7MCPS302.AMER.DELL.COM%3E"
+       TITLE="[JIIC-Discuss] Issue creating the iso file for ESXI">Sangita_Pandit at Dell.com
+       </A><BR>
+    <I>Mon Aug  2 23:24:33 CEST 2010</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I have an ESXI 4.1 iso extracted in the folder.  I am trying to rebind the iso folder back into iso using the JIIC.  However, the iso I create is giving the checksum error.  I am not sure what the issue is.  Please can you help me in pointing what is wrong?  Any help will be greatly appreciated.
+
+Here is the code snippet
+ISO9660Config iso9660config = new ISO9660Config();
+            iso9660config.allowASCII(false);
+            iso9660config.setInterchangeLevel(1);
+            iso9660config.restrictDirDepthTo8(true);
+            iso9660config.setPublisher(&quot;Modified By Me&quot;);
+            iso9660config.setVolumeID(&quot;Modified ISO&quot;);
+            iso9660config.setDataPreparer(&quot;MySelf.&quot;);
+            //iso9660config.setCopyrightFile(new File(&quot;Copyright.txt&quot;));
+            iso9660config.forceDotDelimiter(true);
+
+                  eltoritoconfig = new ElToritoConfig(new File(
+                              &quot;<A HREF="C://TEMP//isofiles1//ISOLINUX.BIN">C://TEMP//isofiles1//ISOLINUX.BIN</A>&quot;),
+                              ElToritoConfig.BOOT_MEDIA_TYPE_NO_EMU,
+                              ElToritoConfig.PLATFORM_ID_X86, &quot;BOOT.CAT&quot;, 4,
+                              ElToritoConfig.LOAD_SEGMENT_7C0
+                              );
+                  eltoritoconfig.setGenBootInfoTable(true);
+
+            RockRidgeConfig rockridgeconfig = null;
+                  rockridgeconfig = new RockRidgeConfig();
+                  rockridgeconfig.setMkisofsCompatibility(false);
+                  rockridgeconfig.hideMovedDirectoriesStore(true);
+                  rockridgeconfig.forcePortableFilenameCharacterSet(true);
+
+            ISOImageFileHandler isoimagefilehandler = new ISOImageFileHandler(
+                        ISOFile);
+            CreateISO createiso = new CreateISO(isoimagefilehandler,
+                        iso9660rootdirectory);
+            createiso.process(iso9660config, rockridgeconfig, null,
+                        eltoritoconfig);
+
+
+
+Thanks
+Sangita Pandit
+(512) 728 1606(W)
+(512) 879 8328(C)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/jiic-discuss/attachments/20100802/377cc7b0/attachment.html">https://lists.berlios.de/pipermail/jiic-discuss/attachments/20100802/377cc7b0/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/jiic-discuss">More information about the JIIC-Discuss
+mailing list</a><br>
+</body></html>
